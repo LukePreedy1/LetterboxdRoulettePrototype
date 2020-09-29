@@ -1,7 +1,34 @@
 from random import randint
-
+import datetime
 from bs4 import BeautifulSoup
 import requests
+
+
+options = {}
+
+
+# Alters the options regarding release year.
+def year_options():
+    year_opts = {'before': -1, 'after': -1, 'between': (-1, -1)}
+    choice = input('Year options:\n1. Before Year\n2. After Year\n3. Between Years\n4. Go Back\n')
+    # TODO alter this when you add more options
+    while not choice.isdigit() or int(choice) <= 0 or int(choice) > 3:
+        choice = input('Please enter a valid choice.\nYear options:\n1. Before Year\n'
+                       '2. After Year\n3. Between Years\n4. Go Back\n')
+    if choice == 1:
+        before = input('Enter year: ')
+        while not before.isdigit() or int(before) > datetime.datetime.now().year:
+            before = input('Enter valid year.\nEnter year: ')
+        year_opts['before'] = int(before)
+
+
+# Allows the user to select various options about how to select
+# the random movie.
+def select_options():
+    choice = input('Options:\n1. Year\n2. Genre\n3. Go Back\n')
+    # TODO alter this when you add more options
+    while not choice.isdigit() or int(choice) <= 0 or int(choice) > 3:
+        choice = input('Please enter a valid choice.\nOptions:\n1. Year\n2. Genre\n3. Go Back\n')
 
 
 # Given the url of a list, returns the number of pages that list
