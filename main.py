@@ -1,3 +1,5 @@
+from random import randint
+
 from bs4 import BeautifulSoup
 import requests
 
@@ -28,9 +30,15 @@ def get_watchlist_from_username(username):
 
 
 def main():
+    username = input('Enter your letterboxd username: ')
+    try:
+        movies = get_watchlist_from_username(username)
+        print('https://letterboxd.com' + movies[randint(0, len(movies))])
+    except:
+        print('Please enter a valid username.')
+        main()
     return
 
 
 if __name__ == '__main__':
-    get_watchlist_from_username('LukePreedy')
-    # main()
+    main()
