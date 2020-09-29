@@ -9,7 +9,6 @@ options = {}
 
 # Alters the options regarding release year.
 def year_options():
-    year_opts = {'before': -1, 'after': -1, 'between': (-1, -1)}
     choice = input('Year options:\n1. Before Year\n2. After Year\n3. Between Years\n4. Go Back\n')
     # TODO alter this when you add more options
     while not choice.isdigit() or int(choice) <= 0 or int(choice) > 3:
@@ -19,7 +18,21 @@ def year_options():
         before = input('Enter year: ')
         while not before.isdigit() or int(before) > datetime.datetime.now().year:
             before = input('Enter valid year.\nEnter year: ')
-        year_opts['before'] = int(before)
+        options['year'] = ('before', int(before))
+    elif choice == 2:
+        after = input('Enter year: ')
+        while not after.isdigit() or int(after) > datetime.datetime.now().year:
+            after = input('Enter valid year.\nEnter year: ')
+        options['year'] = ('after', int(after))
+    elif choice == 3:
+        after = input('Enter earlier year: ')
+        while not after.isdigit() or int(after) > datetime.datetime.now().year:
+            after = input('Enter valid year.\nEnter earlier year: ')
+        before = input('Enter later year: ')
+        while not before.isdigit() or int(before) > datetime.datetime.now().year or int(before) < int(after):
+            before = input('Enter valid year.\nEnter later year: ')
+        options['year'] = ('between', (int(after), int(before)))
+    return
 
 
 # Allows the user to select various options about how to select
@@ -54,6 +67,10 @@ def get_watchlist_from_username(username):
             break
         movies += temp_movies
     return list(map(lambda movie: movie['data-film-slug'], movies))
+
+# TODO Note: it is faster to choose a movie from the list randomly,
+# then check if it fits the criteria than to go through each individually
+# and check, since each web call is very expensive.
 
 
 def main():
