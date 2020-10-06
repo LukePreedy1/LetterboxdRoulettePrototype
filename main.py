@@ -9,6 +9,9 @@ import requests
 # The 'between' option takes a long time to search.
 
 options = {}
+genres = ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family',
+          'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction',
+          'Thriller', 'TV Movie', 'War', 'Western']
 
 
 # Alters the options regarding release year.
@@ -40,6 +43,26 @@ def year_options():
 
 # Alters the options regarding genres.
 def genre_options():
+    choice = input('Genre Options:\n1. Contains Genre(s)\n2. Does not Contain Genre(s)\n3. Go Back\n')
+    while not choice.isdigit() or int(choice) <= 0 or int(choice) > 3:
+        choice = input('Please enter a valid choice.\nGenre Options:\n1. Contains Genre\n'
+                       '2. Does not Contain Genre\n3. Go Back')
+
+    if choice == '1':
+        for i in range(0, len(genres)):
+            print(str(i + 1) + '. ' + genres[i])
+        print(str(len(genres) + 1) + '. Done')
+        choice1 = input()
+        while not choice1.isdigit() or int(choice1) <= 0 or int(choice1) > len(genres) + 1:
+            print('Please enter a valid choice.')
+            for i in range(0, len(genres)):
+                print(str(i + 1) + '. ' + genres[i])
+            print(str(len(genres) + 1) + '. Done')
+            choice1 = input()
+        if choice1 == len(genres) + 1:
+            return
+        else:
+            
     # TODO do this next.
     return
 
@@ -104,7 +127,7 @@ def check_options(movie):
         elif options['year'][0] == 'after' and options['year'][1] >= int(year):
             return False
         elif options['year'][0] == 'between' and \
-                (options['year'][1][0] < int(year) or options['year'][1][1] > int(year)):
+                (options['year'][1][0] > int(year) or options['year'][1][1] < int(year)):
             return False
 
     # TODO just returns True for now, will fix later.
