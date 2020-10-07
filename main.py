@@ -41,28 +41,37 @@ def year_options():
     return
 
 
+# Alters the options regarding the contained genres.
+# Man, this would be so much easier with a GUI of checkboxes.
+def contains_genre_options():
+    for i in range(0, len(genres)):
+        print(str(i + 1) + '. ' + genres[i])
+    print(str(len(genres) + 1) + '. Done')
+    choice = input()
+    while not choice.isdigit() or int(choice) <= 0 or int(choice) > len(genres) + 1:
+        print('Please enter a valid choice.')
+        for i in range(0, len(genres)):
+            print(str(i + 1) + '. ' + genres[i])
+        print(str(len(genres) + 1) + '. Done')
+        choice = input()
+    if choice == len(genres) + 1:
+        return
+    else:
+        return
+
+
 # Alters the options regarding genres.
 def genre_options():
     choice = input('Genre Options:\n1. Contains Genre(s)\n2. Does not Contain Genre(s)\n3. Go Back\n')
     while not choice.isdigit() or int(choice) <= 0 or int(choice) > 3:
         choice = input('Please enter a valid choice.\nGenre Options:\n1. Contains Genre\n'
                        '2. Does not Contain Genre\n3. Go Back')
-
+    contains = []
+    does_not_contain = []
     if choice == '1':
-        for i in range(0, len(genres)):
-            print(str(i + 1) + '. ' + genres[i])
-        print(str(len(genres) + 1) + '. Done')
-        choice1 = input()
-        while not choice1.isdigit() or int(choice1) <= 0 or int(choice1) > len(genres) + 1:
-            print('Please enter a valid choice.')
-            for i in range(0, len(genres)):
-                print(str(i + 1) + '. ' + genres[i])
-            print(str(len(genres) + 1) + '. Done')
-            choice1 = input()
-        if choice1 == len(genres) + 1:
-            return
-        else:
-            
+        contains_genre_options()
+
+
     # TODO do this next.
     return
 
